@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="default_query">
+
+    <select id="test_count" resultType="int">
+        SELECT count(*) FROM lucy;
+    </select>
+
+    <insert id="insert_data" parameterType="dto.Lucy">
+        INSERT INTO lucy (sitename, domain, docid, date, url, title) VALUES (#{wc_sitename}, #{au_domain}, #{kw_docid}, #{in_date}, #{au_url}, #{an_title});
+    </insert>
+    
+    <insert id="foreach_insert" parameterType="dto.Lucy">
+        INSERT INTO lucy (sitename, domain, docid, date, url, title) VALUES
+        <foreach collection="list" item="dto.Lucy" separator=",">
+            (#{dto.Lucy.wc_sitename}, #{dto.Lucy.au_domain}, #{dto.Lucy.kw_docid}, #{dto.Lucy.in_date}, #{dto.Lucy.au_url}, #{dto.Lucy.an_title})
+        </foreach>
+    </insert>
+</mapper>
